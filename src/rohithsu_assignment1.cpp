@@ -41,9 +41,13 @@ int main(int argc, char **argv)
 	cse4589_init_log(argv[2]);
 
 	/* Clear LOGFILE*/
-    fclose(fopen(LOGFILE, "w"));
+	fclose(fopen(LOGFILE, "w"));
 
 	/*Start Here*/
-	
+
+	if (strcmp(argv[1], (char *)"c") == 0)
+		client c(argv[2]);
+	if (strcmp(argv[1], (char *)"s") == 0)
+		server s(argv[2]);
 	return 0;
 }
