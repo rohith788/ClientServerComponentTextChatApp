@@ -13,6 +13,11 @@
 #define STDIN 0
 using namespace std;
 
+bool compare_for_list(socket_info client1, socket_info client2)
+{
+    return client1.port_num < client1.port_num;
+}
+
 server::server(char *port)
 {
     strcpy(system_socket.port_num, port); // get the port number
@@ -47,7 +52,7 @@ server::server(char *port)
     client_socket_address.sin_family = AF_INET;
     client_socket_address.sin_addr = *((struct in_addr *)host->h_addr);
     client_socket_address.sin_port = htons(atoi(port));
-    if (bind(system_socket.listner, (struct sockaddr *)&client_socket_address, sizeof(client_socket_address) < 0))
+    if (bind(system_socket.listner, (struct sockaddr *)&client_socket_address, sizeof(client_socket_address)) == -1)
     {
         cerr << "bind\n";
         exit(1);
@@ -113,6 +118,12 @@ server::server(char *port)
                     else if (strcmp(buffer, "LIST") == 0)
                     {
                         cse4589_print_and_log("[LIST:SUCCESS]\n");
+                        int i = 1;
+                        system_socket.client_list.sort(compare_for_list);
+                        for (list<socket_info>::iterator client = system_socket.client_list.begin(); client != system_socket.client_list.end(); ++client)
+                        {
+                            cse4589_print_and_log("%-5d%-35s%-20s%-8d\n", i++, client->hostname, client->ip_addr, client->port_num);
+                        }
                         cse4589_print_and_log("[LIST:END]\n");
                     }
                 }

@@ -35,6 +35,7 @@ using namespace std;
  * @param  argv The argument list
  * @return 0 EXIT_SUCCESS
  */
+
 int main(int argc, char **argv)
 {
 	/*Init. Logger*/
@@ -44,7 +45,6 @@ int main(int argc, char **argv)
 	fclose(fopen(LOGFILE, "w"));
 
 	/*Start Here*/
-
 	if (strcmp(argv[1], (char *)"c") == 0)
 		client c(argv[2]);
 	if (strcmp(argv[1], (char *)"s") == 0)

@@ -56,6 +56,7 @@ class client : public common
 {
 public:
     client(char *port);
+
     bool check_client_ip_valid(char *ip, int port);
     void break_command(const char *cmd, char *&server_ip, char *&server_port);
 };
